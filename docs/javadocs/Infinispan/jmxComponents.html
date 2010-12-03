@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<HEAD>
+<META NAME="description" content="JMX components exposed by Infinispan" />
+<TITLE>
+JMX Components (Infinispan Distribution 4.0.0.CR1 API)
+</TITLE>
+<LINK REL="stylesheet" HREF="stylesheet.css" TYPE="text/css"/>
+</HEAD>
+<BODY>
+<h2>JMX Components available</h2><br /><UL><LI><A HREF="#Activation">Activation</A> <I>(Component that handles activating entries that have been passivated to a CacheStore by loading them into memory.)</I></LI>
+<LI><A HREF="#Cache">Cache</A> <I>(Component that acts as a manager, factory and container for caches in the system.)</I></LI>
+<LI><A HREF="#CacheLoader">CacheLoader</A> <I>(Component that handles loading entries from a CacheStore into memory.)</I></LI>
+<LI><A HREF="#CacheManager">CacheManager</A> <I>(Component that acts as a manager, factory and container for caches in the system.)</I></LI>
+<LI><A HREF="#CacheStore">CacheStore</A> <I>(Component that handles storing of entries to a CacheStore from memory.)</I></LI>
+<LI><A HREF="#DeadlockDetectingLockManager">DeadlockDetectingLockManager</A> <I>(Information about the number of deadlocks that were detected)</I></LI>
+<LI><A HREF="#DistributionManager">DistributionManager</A> <I>(Component that handles distribution of content across a cluster)</I></LI>
+<LI><A HREF="#Invalidation">Invalidation</A> <I>(Component responsible for invalidating entries on remote caches when entries are written to locally.)</I></LI>
+<LI><A HREF="#LockManager">LockManager</A> <I>(Manager that handles MVCC locks for entries)</I></LI>
+<LI><A HREF="#Passivation">Passivation</A> <I>(Component that handles passivating entries to a CacheStore on eviction.)</I></LI>
+<LI><A HREF="#RpcManager">RpcManager</A> <I>(Manages all remote calls to remote cache instances in the cluster.)</I></LI>
+<LI><A HREF="#Statistics">Statistics</A> <I>(General statistics such as timings, hit/miss ratio, etc.)</I></LI>
+<LI><A HREF="#Transactions">Transactions</A> <I>(Component that manages the cache's participation in JTA transactions.)</I></LI>
+</UL><BR /><BR /><HR /><BR /><A NAME="Activation">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>Activation</tt></b>  (Class <TT><A HREF="org/infinispan/interceptors/ActivationInterceptor.html">org.infinispan.interceptors.ActivationInterceptor</A></TT>)<br /><I>Component that handles activating entries that have been passivated to a CacheStore by loading them into memory.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Activations</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of activation events</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="Cache">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>Cache</tt></b>  (Class <TT><A HREF="org/infinispan/CacheDelegate.html">org.infinispan.CacheDelegate</A></TT>)<br /><I>Component that acts as a manager, factory and container for caches in the system.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>CacheName</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Returns the cache name</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>CacheStatus</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Returns the cache status</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>start</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Starts the cache.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void start()</tt></TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>stop</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Stops the cache.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void stop()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="CacheLoader">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>CacheLoader</tt></b>  (Class <TT><A HREF="org/infinispan/interceptors/CacheLoaderInterceptor.html">org.infinispan.interceptors.CacheLoaderInterceptor</A></TT>)<br /><I>Component that handles loading entries from a CacheStore into memory.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>CacheLoaderLoads</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of entries loaded from cache store</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>CacheLoaderMisses</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of entries that did not exist in cache store</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="CacheManager">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>CacheManager</tt></b>  (Class <TT><A HREF="org/infinispan/manager/DefaultCacheManager.html">org.infinispan.manager.DefaultCacheManager</A></TT>)<br /><I>Component that acts as a manager, factory and container for caches in the system.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>CacheManagerStatus</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The status of the cache manager instance.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>CreatedCacheCount</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The total number of created caches, including the default cache.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>DefinedCacheCount</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The total number of defined caches, excluding the default cache.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>DefinedCacheNames</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The defined cache names and their statuses.  The default cache is not included in this representation.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Name</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The name of this cache manager</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>RunningCacheCount</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The total number of running caches, including the default cache.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Version</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Infinispan version.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>getCache</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Retrieves the default cache associated with this cache manager and starts it up.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>Cache getCache()</tt></TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>getCache</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Retrieves a named cache from the system and starts it up.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>Cache getCache(String p0)</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="CacheStore">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>CacheStore</tt></b>  (Class <TT><A HREF="org/infinispan/interceptors/CacheStoreInterceptor.html">org.infinispan.interceptors.CacheStoreInterceptor</A></TT>)<br /><I>Component that handles storing of entries to a CacheStore from memory.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>CacheLoaderStores</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">number of cache loader stores</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="DeadlockDetectingLockManager">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>DeadlockDetectingLockManager</tt></b>  (Class <TT><A HREF="org/infinispan/util/concurrent/locks/DeadlockDetectingLockManager.html">org.infinispan.util.concurrent.locks.DeadlockDetectingLockManager</A></TT>)<br /><I>Information about the number of deadlocks that were detected</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>DetectedLocalDeadlocks</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of local detected deadlocks</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>DetectedRemoteDeadlocks</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of remote deadlocks detected</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>LocallyInterruptedTransactions</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of locally originated transactions that were interrupted as a deadlock situation was detected</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>OverlapWithNotDeadlockAwareLockOwners</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of situtations when we try to determine a deadlock and the other lock owner is e.g. a local tx. In this scenario we cannot run the deadlock detection mechanism</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>TotalNumberOfDetectedDeadlocks</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Total number of local detected deadlocks</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="DistributionManager">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>DistributionManager</tt></b>  (Class <TT><A HREF="org/infinispan/distribution/DistributionManagerImpl.html">org.infinispan.distribution.DistributionManagerImpl</A></TT>)<br /><I>Component that handles distribution of content across a cluster</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>RehashInProgress</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Checks whether the node is involved in a rehash.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>boolean</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>joinComplete</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">If true, the node has successfully joined the grid and is considered to hold state.  If false, the join process is still in progress.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>boolean</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>isAffectedByRehash</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Determines whether a given key is affected by an ongoing rehash, if any.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>boolean isAffectedByRehash(Object p0)</tt></TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>isLocatedLocally</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Tells you whether a given key is local to this instance of the cache.  Only works with String keys.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>boolean isLocatedLocally(String p0)</tt></TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>locateKey</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Locates an object in a cluster.  Only works with String keys.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>List locateKey(String p0)</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="Invalidation">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>Invalidation</tt></b>  (Class <TT><A HREF="org/infinispan/interceptors/InvalidationInterceptor.html">org.infinispan.interceptors.InvalidationInterceptor</A></TT>)<br /><I>Component responsible for invalidating entries on remote caches when entries are written to locally.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Invalidations</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of invalidations</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>statisticsEnabled</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Enables or disables the gathering of statistics by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>boolean</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">true</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="LockManager">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>LockManager</tt></b>  (Class <TT><A HREF="org/infinispan/util/concurrent/locks/LockManagerImpl.html">org.infinispan.util.concurrent.locks.LockManagerImpl</A></TT>)<br /><I>Manager that handles MVCC locks for entries</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>ConcurrencyLevel</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The concurrency level that the MVCC Lock Manager has been configured with.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>int</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>NumberOfLocksAvailable</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The number of exclusive locks that are available.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>int</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>NumberOfLocksHeld</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The number of exclusive locks that are held.</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>int</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="Passivation">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>Passivation</tt></b>  (Class <TT><A HREF="org/infinispan/interceptors/PassivationInterceptor.html">org.infinispan.interceptors.PassivationInterceptor</A></TT>)<br /><I>Component that handles passivating entries to a CacheStore on eviction.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Passivations</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of passivation events</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="RpcManager">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>RpcManager</tt></b>  (Class <TT><A HREF="org/infinispan/remoting/rpc/RpcManagerImpl.html">org.infinispan.remoting.rpc.RpcManagerImpl</A></TT>)<br /><I>Manages all remote calls to remote cache instances in the cluster.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Address</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">The network address associated with this instance</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>ClusterSize</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Size of the cluster in number of nodes</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Members</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">List of members in the cluster</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>ReplicationCount</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of successful replications</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>ReplicationFailures</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of failed replications</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>SuccessRatio</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Successful replications as a ratio of total replications</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>String</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>statisticsEnabled</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Enables or disables the gathering of statistics by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>boolean</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">true</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="Statistics">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>Statistics</tt></b>  (Class <TT><A HREF="org/infinispan/interceptors/CacheMgmtInterceptor.html">org.infinispan.interceptors.CacheMgmtInterceptor</A></TT>)<br /><I>General statistics such as timings, hit/miss ratio, etc.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>AverageReadTime</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Average number of milliseconds for a read operation on the cache</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>AverageWriteTime</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Average number of milliseconds for a write operation in the cache</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>ElapsedTime</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of seconds since cache started</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Evictions</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of cache eviction operations</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>HitRatio</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Percentage hit/(hit+miss) ratio for the cache</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>double</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Hits</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of cache attribute hits</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Misses</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of cache attribute misses</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>NumberOfEntries</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of entries in the cache</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>int</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>ReadWriteRatio</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">read/writes ratio for the cache</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>double</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Stores</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">number of cache attribute put operations</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>TimeSinceReset</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of seconds since the cache statistics were last reset</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR /><A NAME="Transactions">
+<TABLE WIDTH="100%" CELLSPACING="1" CELLPADDING="0" BORDER="1">
+<TR CLASS="TableHeadingColor"><TH ALIGN="LEFT"><b>Component <tt>Transactions</tt></b>  (Class <TT><A HREF="org/infinispan/interceptors/TxInterceptor.html">org.infinispan.interceptors.TxInterceptor</A></TT>)<br /><I>Component that manages the cache's participation in JTA transactions.</I>
+</TH></TR>
+<TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Attributes</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="40%"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Type</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Writable</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Commits</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of transaction commits performed since last reset</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Prepares</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of transaction prepares performed since last reset</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>Rollbacks</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Number of transaction rollbacks performed since last reset</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>long</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">false</TD></TR><TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>statisticsEnabled</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Enables or disables the gathering of statistics by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>boolean</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">true</TD></TR></TABLE></TD></TR><TR CLASS="TableSubHeadingColor"><TH ALIGN="LEFT"><strong><i>Operations</i></strong></TH></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="CENTER"><TABLE WIDTH="100%" cellspacing="1" cellpadding="0" border="0">
+<TR CLASS="TableSubHeadingColor"><TD ALIGN="LEFT" VALIGN="TOP"><strong>Name</strong></TD>
+<TD ALIGN="LEFT" WIDTH="50%" VALIGN="TOP"><strong>Description</strong></TD>
+<TD ALIGN="LEFT" VALIGN="TOP"><strong>Signature</strong></TD></TR>
+<TR BGCOLOR="white" CLASS="TableRowColor"><TD ALIGN="LEFT" VALIGN="TOP"><tt>resetStatistics</tt></TD><TD ALIGN="LEFT" VALIGN="TOP">Resets statistics gathered by this component</TD><TD ALIGN="LEFT" VALIGN="TOP"><tt>void resetStatistics()</tt></TD></TR></TABLE></TD></TR></TABLE><BR /><BR />
+<HR />
+Copyright &#169; 2009 <a href="http://www.jboss.org">JBoss, a division of Red Hat</a>. All Rights Reserved.
+<!-- Google Analytics --> <script type='text/javascript'> var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E")); </script> <script type='text/javascript'> try { var pageTracker = _gat._getTracker("UA-8601422-4"); pageTracker._trackPageview(); } catch(err) {}</script>
+</BODY>
+</HTML>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+
+<project name="JGroups Lab" default="compile" basedir=".">
+    <property name="root.dir" value="${basedir}"/>
+    <property name="src.dir" value="${root.dir}/src"/>
+    <property name="compile.dir" value="${root.dir}/classes"/>
+    <property name="lib.dir" value="${root.dir}/libs"/>
+
+
+    <path id="classpath">
+        <pathelement location="${compile.dir}"/>
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+
+
+    <target name="prepare">
+        <property environment="env"/>
+        <mkdir dir="${compile.dir}"/>
+    </target>
+
+
+    <target name="compile"
+        depends="prepare"
+        description="Compiles all Java files">
+        <javac destdir="${compile.dir}"
+            classpathref="classpath"
+            debug="on"
+            deprecation="off"
+            optimize="off"
+            listfiles="false"
+            includes="*/**">
+            <src path="${src.dir}"/>
+        </javac>
+    </target>
+
+
+    <!-- clean up directories -->
+    <target name="clean"
+        description="Removes all class files and the ./dist directory">
+        <delete dir="${compile.dir}" failonerror="false"/>
+        <delete>
+            <fileset dir="${root.dir}" defaultexcludes="no">
+                <include name="**/*~"/>
+            </fileset>
+        </delete>
+    </target>
+
+
+
+
+
+
+</project>

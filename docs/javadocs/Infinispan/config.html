@@ -1,0 +1,578 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<HEAD>
+<META NAME="description" content="Infinispan configuration options" />
+<TITLE>
+Configuration options (Infinispan Distribution 4.0.0.CR1 API)
+</TITLE>
+<LINK REL="stylesheet" HREF="stylesheet2.css" TYPE="text/css"/>
+</HEAD>
+<BODY>
+<h2>Infinispan configuration options</h2><br/><UL><div class="source"><pre>  &lt;<a href="#ce__infinispan">infinispan</a>&gt;
+    &lt;<a href="#ce_infinispan_global">global</a>&gt;
+      &lt;<a href="#ce_global_globalJmxStatistics">globalJmxStatistics</a>&gt;
+      &lt;<a href="#ce_global_replicationQueueScheduledExecutor">replicationQueueScheduledExecutor</a>&gt;
+        &lt;<a href="#ce_replicationQueueScheduledExecutor_properties">properties</a>&gt;
+      &lt;<a href="#ce_global_transport">transport</a>&gt;
+        &lt;<a href="#ce_transport_properties">properties</a>&gt;
+      &lt;<a href="#ce_global_asyncTransportExecutor">asyncTransportExecutor</a>&gt;
+        &lt;<a href="#ce_asyncTransportExecutor_properties">properties</a>&gt;
+      &lt;<a href="#ce_global_serialization">serialization</a>&gt;
+      &lt;<a href="#ce_global_shutdown">shutdown</a>&gt;
+      &lt;<a href="#ce_global_evictionScheduledExecutor">evictionScheduledExecutor</a>&gt;
+        &lt;<a href="#ce_evictionScheduledExecutor_properties">properties</a>&gt;
+      &lt;<a href="#ce_global_asyncListenerExecutor">asyncListenerExecutor</a>&gt;
+        &lt;<a href="#ce_asyncListenerExecutor_properties">properties</a>&gt;
+    &lt;<a href="#ce_infinispan_default">default</a>&gt;
+      &lt;<a href="#ce_default_transaction">transaction</a>&gt;
+      &lt;<a href="#ce_default_invocationBatching">invocationBatching</a>&gt;
+      &lt;<a href="#ce_default_loaders">loaders</a>&gt;
+        &lt;<a href="#ce_loaders_loader">loader</a>&gt;
+          &lt;<a href="#ce_loader_async">async</a>&gt;
+          &lt;<a href="#ce_loader_properties">properties</a>&gt;
+          &lt;<a href="#ce_loader_singletonStore">singletonStore</a>&gt;
+      &lt;<a href="#ce_default_unsafe">unsafe</a>&gt;
+      &lt;<a href="#ce_default_jmxStatistics">jmxStatistics</a>&gt;
+      &lt;<a href="#ce_default_clustering">clustering</a>&gt;
+        &lt;<a href="#ce_clustering_sync">sync</a>&gt;
+        &lt;<a href="#ce_clustering_l1">l1</a>&gt;
+        &lt;<a href="#ce_clustering_stateRetrieval">stateRetrieval</a>&gt;
+        &lt;<a href="#ce_clustering_async">async</a>&gt;
+        &lt;<a href="#ce_clustering_hash">hash</a>&gt;
+      &lt;<a href="#ce_default_deadlockDetection">deadlockDetection</a>&gt;
+      &lt;<a href="#ce_default_lazyDeserialization">lazyDeserialization</a>&gt;
+      &lt;<a href="#ce_default_locking">locking</a>&gt;
+      &lt;<a href="#ce_default_expiration">expiration</a>&gt;
+      &lt;<a href="#ce_default_eviction">eviction</a>&gt;
+      &lt;<a href="#ce_default_customInterceptors">customInterceptors</a>&gt;
+        &lt;<a href="#ce_customInterceptors_interceptor">interceptor</a>&gt;
+          &lt;<a href="#ce_interceptor_properties">properties</a>&gt;
+</pre></div>
+<a name="ce__infinispan"></a><div class="section"><h3><a name="infinispan"></a>infinispan</h3>
+<p>Root of Infinispan configuration. Infinispan configuration element can optionally have multiple 
+ namedCache child elements. Each namedCache builds up on a template provided by default cache. namedCache has 
+ the exact same XML structure as default cache and is therefore omitted from this reference.  Child elements are <a href="#ce_infinispan_global">&lt;global&gt;</a>,<a href="#ce_infinispan_default">&lt;default&gt;</a>.
+</p>
+<a name="ce_infinispan_global"></a><div class="section"><h3><a name="global"></a>global</h3>
+<p>Defines global configuration shared among all cache instances. Parent element is <a href="#ce__infinispan">&lt;infinispan&gt;</a>. Child elements are <a href="#ce_global_globalJmxStatistics">&lt;globalJmxStatistics&gt;</a>,<a href="#ce_global_replicationQueueScheduledExecutor">&lt;replicationQueueScheduledExecutor&gt;</a>,<a href="#ce_global_transport">&lt;transport&gt;</a>,<a href="#ce_global_asyncTransportExecutor">&lt;asyncTransportExecutor&gt;</a>,<a href="#ce_global_serialization">&lt;serialization&gt;</a>,<a href="#ce_global_shutdown">&lt;shutdown&gt;</a>,<a href="#ce_global_evictionScheduledExecutor">&lt;evictionScheduledExecutor&gt;</a>,<a href="#ce_global_asyncListenerExecutor">&lt;asyncListenerExecutor&gt;</a>.
+</p>
+<a name="ce_global_globalJmxStatistics"></a><div class="section"><h3><a name="globalJmxStatistics"></a>globalJmxStatistics</h3>
+<p>Determines global JMX settings for all cache instances. Parent element is <a href="#ce_infinispan_global">&lt;global&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>allowDuplicateDomains</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, multiple cache manager instances could be configured under the same JMX domain</td>
+</tr>
+<tr class="b"><td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>Toggle to enable/disable exposing Infinispan objects to JMX</td>
+</tr>
+<tr class="b"><td><code>mBeanServerLookup</code></td>
+<td><code>string</code></td>
+<td>org.infinispan.jmx.PlatformMBeanServerLookup</td>
+<td>Fully qualified name of class that will attempt to find JMX MBean server</td>
+</tr>
+<tr class="b"><td><code>jmxDomain</code></td>
+<td><code>string</code></td>
+<td>infinispan</td>
+<td>JMX domain name where all relevant JMX exposed objects will be bound</td>
+</tr>
+</table></div>
+<a name="ce_global_replicationQueueScheduledExecutor"></a><div class="section"><h3><a name="replicationQueueScheduledExecutor"></a>replicationQueueScheduledExecutor</h3>
+<p>Executor for listeners.Transport executor.Eviction executor.Executor for replication. Parent element is <a href="#ce_infinispan_global">&lt;global&gt;</a>. Child elements are <a href="#ce_replicationQueueScheduledExecutor_properties">&lt;properties&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>factory</code></td>
+<td><code>string</code></td>
+<td></td>
+<td>Executor fully qualified class name</td>
+</tr>
+</table></div>
+<table class="bodyTable"> <tr class="a"><th>Property</th><th>Description</th></tr>
+<tr class="b"><td>maxThreads</td>
+<td>Number of threads for this executor</td>
+</tr>
+<tr class="b"><td>threadNamePrefix</td>
+<td>Name prefix for threads created in this executor</td>
+</tr>
+</table></div>
+<a name="ce_global_transport"></a><div class="section"><h3><a name="transport"></a>transport</h3>
+<p>Determines Infinispan transport type and accompanying properties. Parent element is <a href="#ce_infinispan_global">&lt;global&gt;</a>. Child elements are <a href="#ce_transport_properties">&lt;properties&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>clusterName</code></td>
+<td><code>string</code></td>
+<td>Infinispan-Cluster</td>
+<td>Cluster name where all cache instances defined are connected</td>
+</tr>
+<tr class="b"><td><code>nodeName</code></td>
+<td><code>string</code></td>
+<td>null</td>
+<td>Node name for the underlying transport channel</td>
+</tr>
+<tr class="b"><td><code>distributedSyncTimeout</code></td>
+<td><code>long</code></td>
+<td>60000</td>
+<td>todo</td>
+</tr>
+<tr class="b"><td><code>transportClass</code></td>
+<td><code>string</code></td>
+<td>org.infinispan.remoting.transport.jgroups.JGroupsTransport</td>
+<td>Fully qualified name of a class that implements network transport</td>
+</tr>
+</table></div>
+<a name="ce_global_asyncTransportExecutor"></a><div class="section"><h3><a name="asyncTransportExecutor"></a>asyncTransportExecutor</h3>
+<p>Executor for listeners.Transport executor.Eviction executor.Executor for replication. Parent element is <a href="#ce_infinispan_global">&lt;global&gt;</a>. Child elements are <a href="#ce_asyncTransportExecutor_properties">&lt;properties&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>factory</code></td>
+<td><code>string</code></td>
+<td></td>
+<td>Executor fully qualified class name</td>
+</tr>
+</table></div>
+<table class="bodyTable"> <tr class="a"><th>Property</th><th>Description</th></tr>
+<tr class="b"><td>maxThreads</td>
+<td>Number of threads for this executor</td>
+</tr>
+<tr class="b"><td>threadNamePrefix</td>
+<td>Name prefix for threads created in this executor</td>
+</tr>
+</table></div>
+<a name="ce_global_serialization"></a><div class="section"><h3><a name="serialization"></a>serialization</h3>
+<p>Serialization and marshalling settings. Parent element is <a href="#ce_infinispan_global">&lt;global&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>marshallerClass</code></td>
+<td><code>string</code></td>
+<td>org.infinispan.marshall.VersionAwareMarshaller</td>
+<td>Fully qualified name of a class that marshalls objects between cache nodes</td>
+</tr>
+<tr class="b"><td><code>version</code></td>
+<td><code>string</code></td>
+<td>4.0</td>
+<td>Marshalling serialization version</td>
+</tr>
+</table></div>
+<a name="ce_global_shutdown"></a><div class="section"><h3><a name="shutdown"></a>shutdown</h3>
+<p>Determines shutdown hook settings. 
+ By default a shutdown hook is registered even if no MBean server (apart from the JDK default) is detected. Parent element is <a href="#ce_infinispan_global">&lt;global&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>hookBehavior</code></td>
+<td><code>shutdownHookBehavior</code>* (DEFAULT|REGISTER|DONT_REGISTER)</td>
+<td>DEFAULT</td>
+<td>Behavior of the JVM shutdown hook registered by the cache</td>
+</tr>
+</table></div>
+<a name="ce_global_evictionScheduledExecutor"></a><div class="section"><h3><a name="evictionScheduledExecutor"></a>evictionScheduledExecutor</h3>
+<p>Executor for listeners.Transport executor.Eviction executor.Executor for replication. Parent element is <a href="#ce_infinispan_global">&lt;global&gt;</a>. Child elements are <a href="#ce_evictionScheduledExecutor_properties">&lt;properties&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>factory</code></td>
+<td><code>string</code></td>
+<td></td>
+<td>Executor fully qualified class name</td>
+</tr>
+</table></div>
+<table class="bodyTable"> <tr class="a"><th>Property</th><th>Description</th></tr>
+<tr class="b"><td>maxThreads</td>
+<td>Number of threads for this executor</td>
+</tr>
+<tr class="b"><td>threadNamePrefix</td>
+<td>Name prefix for threads created in this executor</td>
+</tr>
+</table></div>
+<a name="ce_global_asyncListenerExecutor"></a><div class="section"><h3><a name="asyncListenerExecutor"></a>asyncListenerExecutor</h3>
+<p>Executor for listeners.Transport executor.Eviction executor.Executor for replication. Parent element is <a href="#ce_infinispan_global">&lt;global&gt;</a>. Child elements are <a href="#ce_asyncListenerExecutor_properties">&lt;properties&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>factory</code></td>
+<td><code>string</code></td>
+<td></td>
+<td>Executor fully qualified class name</td>
+</tr>
+</table></div>
+<table class="bodyTable"> <tr class="a"><th>Property</th><th>Description</th></tr>
+<tr class="b"><td>maxThreads</td>
+<td>Number of threads for this executor</td>
+</tr>
+<tr class="b"><td>threadNamePrefix</td>
+<td>Name prefix for threads created in this executor</td>
+</tr>
+</table></div>
+<a name="ce_infinispan_default"></a><div class="section"><h3><a name="default"></a>default</h3>
+<p>Configures the default cache and acts as a template for other named caches defined.Configures a named cache that builds up on template provided by default cache. Parent element is <a href="#ce__infinispan">&lt;infinispan&gt;</a>. Child elements are <a href="#ce_default_transaction">&lt;transaction&gt;</a>,<a href="#ce_default_invocationBatching">&lt;invocationBatching&gt;</a>,<a href="#ce_default_loaders">&lt;loaders&gt;</a>,<a href="#ce_default_unsafe">&lt;unsafe&gt;</a>,<a href="#ce_default_jmxStatistics">&lt;jmxStatistics&gt;</a>,<a href="#ce_default_clustering">&lt;clustering&gt;</a>,<a href="#ce_default_deadlockDetection">&lt;deadlockDetection&gt;</a>,<a href="#ce_default_lazyDeserialization">&lt;lazyDeserialization&gt;</a>,<a href="#ce_default_locking">&lt;locking&gt;</a>,<a href="#ce_default_expiration">&lt;expiration&gt;</a>,<a href="#ce_default_eviction">&lt;eviction&gt;</a>,<a href="#ce_default_customInterceptors">&lt;customInterceptors&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>name</code></td>
+<td><code>string</code></td>
+<td>null</td>
+<td>Cache name if this is a namedCache</td>
+</tr>
+</table></div>
+<a name="ce_default_transaction"></a><div class="section"><h3><a name="transaction"></a>transaction</h3>
+<p>Defines transactional (JTA) characteristics of the cache. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>useEagerLocking</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, eagerly lock cache keys across cluster instead of during two-phase prepare/commit phase</td>
+</tr>
+<tr class="b"><td><code>syncRollbackPhase</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, rollback phase will be done as a synchronous call</td>
+</tr>
+<tr class="b"><td><code>syncCommitPhase</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, commit phase will be done as a synchronous call</td>
+</tr>
+<tr class="b"><td><code>transactionManagerLookupClass</code></td>
+<td><code>string</code></td>
+<td>org.infinispan.transaction.lookup.GenericTransactionManagerLookup</td>
+<td>Fully qualified class name of a class that is supposed to obtain reference to a transaction manager</td>
+</tr>
+</table></div>
+<a name="ce_default_invocationBatching"></a><div class="section"><h3><a name="invocationBatching"></a>invocationBatching</h3>
+<p>Defines whether invocation batching is allowed in this cache instance. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>Toggle switch</td>
+</tr>
+</table></div>
+<a name="ce_default_loaders"></a><div class="section"><h3><a name="loaders"></a>loaders</h3>
+<p>Holds the configuration of the cache loader chain. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>. Child elements are <a href="#ce_loaders_loader">&lt;loader&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>preload</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, performs a preload on the cache loader</td>
+</tr>
+<tr class="b"><td><code>passivation</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, activates entries that have been passivated to a store by loading
+            them into memory as well as writes evicted entries back to the store</td>
+</tr>
+<tr class="b"><td><code>shared</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, the node that makes a modification is the only one who writes it to
+            the store using the relevant cache loader.</td>
+</tr>
+</table></div>
+<a name="ce_loaders_loader"></a><div class="section"><h3><a name="loader"></a>loader</h3>
+<p>Responsible for loading/storing cache data from/to an external source. Parent element is <a href="#ce_default_loaders">&lt;loaders&gt;</a>. Child elements are <a href="#ce_loader_async">&lt;async&gt;</a>,<a href="#ce_loader_properties">&lt;properties&gt;</a>,<a href="#ce_loader_singletonStore">&lt;singletonStore&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>class</code></td>
+<td><code>string</code></td>
+<td>N/A</td>
+<td>Fully qualified name of a cache loader class</td>
+</tr>
+<tr class="b"><td><code>purgeOnStartup</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, purge node state on startup</td>
+</tr>
+<tr class="b"><td><code>ignoreModifications</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, any operation that modifies the cache store (remove, clear, store...etc) won't be applied to it</td>
+</tr>
+<tr class="b"><td><code>purgeSynchronously</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, CacheStore#purgeExpired() call will be done synchronously</td>
+</tr>
+<tr class="b"><td><code>fetchPersistentState</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, fetch persistent state on state transfer</td>
+</tr>
+</table></div>
+<a name="ce_loader_async"></a><div class="section"><h3><a name="async"></a>async</h3>
+<p>Configuration for the async cache loader. Parent element is <a href="#ce_loaders_loader">&lt;loader&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, modifications are stored in the cache store asynchronously.</td>
+</tr>
+<tr class="b"><td><code>threadPoolSize</code></td>
+<td><code>int</code></td>
+<td>1</td>
+<td>Size of the thread pool whose threads are responsible for applying the modifications.</td>
+</tr>
+<tr class="b"><td><code>mapLockTimeout</code></td>
+<td><code>long</code></td>
+<td>5000</td>
+<td>Lock timeout for access to map containing latest state.</td>
+</tr>
+</table></div>
+<a name="ce_loader_singletonStore"></a><div class="section"><h3><a name="singletonStore"></a>singletonStore</h3>
+<p>SingletonStore is a delegating cache store used for situations when only one 
+ instance should interact with the underlying store. The coordinator of the cluster will be responsible for 
+ the underlying CacheStore. SingletonStore is a simply facade to a real CacheStore implementation. It always 
+ delegates reads to the real CacheStore. Parent element is <a href="#ce_loaders_loader">&lt;loader&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>pushStateTimeout</code></td>
+<td><code>long</code></td>
+<td>10000</td>
+<td>If pushStateWhenCoordinator is true, the in-memory state transfer to cache store timeout</td>
+</tr>
+<tr class="b"><td><code>pushStateWhenCoordinator</code></td>
+<td><code>boolean</code></td>
+<td>true</td>
+<td>If true and the node becomes the coordinator, the in-memory state transfer 
+  to the underlying cache store is initiated</td>
+</tr>
+<tr class="b"><td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, the relevant cache store is turned into singleton store</td>
+</tr>
+</table></div>
+<a name="ce_default_unsafe"></a><div class="section"><h3><a name="unsafe"></a>unsafe</h3>
+<p>Allows you to tune various unsafe or non-standard characteristics. Certain operations 
+ such as Cache.put() that are supposed to return the previous value associated with the specified key according 
+ to the java.util.Map contract will not fulfill this contract if unsafe toggle is turned on. Use with care.  
+ See details at http://www.jboss.org/community/wiki/infinispantechnicalfaqs Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>unreliableReturnValues</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>Toggle to enable/disable return value fetching</td>
+</tr>
+</table></div>
+<a name="ce_default_jmxStatistics"></a><div class="section"><h3><a name="jmxStatistics"></a>jmxStatistics</h3>
+<p>Defines how JMX components are bound to an MBean server. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>Toggle switch</td>
+</tr>
+</table></div>
+<a name="ce_default_clustering"></a><div class="section"><h3><a name="clustering"></a>clustering</h3>
+<p>Defines clustering characteristics of the cache. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>. Child elements are <a href="#ce_clustering_sync">&lt;sync&gt;</a>,<a href="#ce_clustering_l1">&lt;l1&gt;</a>,<a href="#ce_clustering_stateRetrieval">&lt;stateRetrieval&gt;</a>,<a href="#ce_clustering_async">&lt;async&gt;</a>,<a href="#ce_clustering_hash">&lt;hash&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>mode</code></td>
+<td><code>string</code></td>
+<td>LOCAL</td>
+<td>Cache replication mode (LOCAL|INVALIDATION|REPLICATION|DISTRIBUTION)</td>
+</tr>
+</table></div>
+<a name="ce_clustering_sync"></a><div class="section"><h3><a name="sync"></a>sync</h3>
+<p>Specifies that network communications are synchronous.  
+ Characteristics of this can be tuned here. Parent element is <a href="#ce_default_clustering">&lt;clustering&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>replTimeout</code></td>
+<td><code>long</code></td>
+<td>15000</td>
+<td>Timeout for synchronous requests</td>
+</tr>
+</table></div>
+<a name="ce_clustering_l1"></a><div class="section"><h3><a name="l1"></a>l1</h3>
+<p>Enables and defines details of the L1 cache. 
+ Only used with the 'distributed' cache mode, and otherwise ignored. Parent element is <a href="#ce_default_clustering">&lt;clustering&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td>true</td>
+<td>Toggle to enable/disable L1 cache</td>
+</tr>
+<tr class="b"><td><code>onRehash</code></td>
+<td><code>boolean</code></td>
+<td>true</td>
+<td>Toggle to enable/disable populating L1 cache after rehash</td>
+</tr>
+<tr class="b"><td><code>lifespan</code></td>
+<td><code>long</code></td>
+<td>600000</td>
+<td>Maximum lifespan of an entry in L1 cache</td>
+</tr>
+</table></div>
+<a name="ce_clustering_stateRetrieval"></a><div class="section"><h3><a name="stateRetrieval"></a>stateRetrieval</h3>
+<p>Configures how state retrieval is performed on new caches in a cluster. Parent element is <a href="#ce_default_clustering">&lt;clustering&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>initialRetryWaitTime</code></td>
+<td><code>long</code></td>
+<td>500</td>
+<td>Initial wait time when backing off before retrying state transfer retrieval</td>
+</tr>
+<tr class="b"><td><code>retryWaitTimeIncreaseFactor</code></td>
+<td><code>int</code></td>
+<td>2</td>
+<td>Wait time increase factor over successive state retrieval backoffs</td>
+</tr>
+<tr class="b"><td><code>numRetries</code></td>
+<td><code>int</code></td>
+<td>5</td>
+<td>Number of state retrieval retries</td>
+</tr>
+<tr class="b"><td><code>timeout</code></td>
+<td><code>long</code></td>
+<td>10000</td>
+<td>Timeout for state transfer</td>
+</tr>
+<tr class="b"><td><code>fetchInMemoryState</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, a new cache node with initiate a state transfer upon join</td>
+</tr>
+</table></div>
+<a name="ce_clustering_async"></a><div class="section"><h3><a name="async"></a>async</h3>
+<p>Specifies that network communications are asynchronous.  
+ Characteristics of this can be tuned here. Parent element is <a href="#ce_default_clustering">&lt;clustering&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>replQueueInterval</code></td>
+<td><code>long</code></td>
+<td>5000</td>
+<td>Interval to take requests of the queue</td>
+</tr>
+<tr class="b"><td><code>useReplQueue</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>Toggle to enable/disable queue</td>
+</tr>
+<tr class="b"><td><code>asyncMarshalling</code></td>
+<td><code>boolean</code></td>
+<td>true</td>
+<td>Toggle to enable/disable asynchronous marshalling</td>
+</tr>
+<tr class="b"><td><code>replQueueMaxElements</code></td>
+<td><code>int</code></td>
+<td>1000</td>
+<td>Maximum allowed number of requests in a queue</td>
+</tr>
+</table></div>
+<a name="ce_clustering_hash"></a><div class="section"><h3><a name="hash"></a>hash</h3>
+<p>Allows fine-tuning of rehashing characteristics.  
+ Only used with the 'distributed' cache mode, and otherwise ignored. Parent element is <a href="#ce_default_clustering">&lt;clustering&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>rehashWait</code></td>
+<td><code>long</code></td>
+<td>60000</td>
+<td>Maximum rehash time</td>
+</tr>
+<tr class="b"><td><code>rehashRpcTimeout</code></td>
+<td><code>long</code></td>
+<td>600000</td>
+<td>Rehashing timeout</td>
+</tr>
+<tr class="b"><td><code>class</code></td>
+<td><code>string</code></td>
+<td>N/A</td>
+<td>Class name of a hashing algorithm</td>
+</tr>
+<tr class="b"><td><code>numOwners</code></td>
+<td><code>int</code></td>
+<td>2</td>
+<td>Number of neighbour nodes in rehash task</td>
+</tr>
+</table></div>
+<a name="ce_default_deadlockDetection"></a><div class="section"><h3><a name="deadlockDetection"></a>deadlockDetection</h3>
+<p>Enables or disables, and tunes, deadlock detection. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>spinDuration</code></td>
+<td><code>long</code></td>
+<td>100</td>
+<td>Time period that determines how often is lock acquisition attempted 
+ within maximum time allowed to acquire a particular lock</td>
+</tr>
+<tr class="b"><td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>Toggle to enable/disable deadlock detection</td>
+</tr>
+</table></div>
+<a name="ce_default_lazyDeserialization"></a><div class="section"><h3><a name="lazyDeserialization"></a>lazyDeserialization</h3>
+<p>Defines lazy deserialization characteristics of the cache. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>Toggle switch</td>
+</tr>
+</table></div>
+<a name="ce_default_locking"></a><div class="section"><h3><a name="locking"></a>locking</h3>
+<p>Defines locking characteristics of the cache. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>useLockStriping</code></td>
+<td><code>boolean</code></td>
+<td>true</td>
+<td>Toggle to enable/disable shared locks across all 
+ elements that need to be locked</td>
+</tr>
+<tr class="b"><td><code>concurrencyLevel</code></td>
+<td><code>int</code></td>
+<td>500</td>
+<td>Concurrency level for number of stripes to create in lock striping</td>
+</tr>
+<tr class="b"><td><code>isolationLevel</code></td>
+<td><code>isolationLevel</code>* (NONE|SERIALIZABLE|REPEATABLE_READ|READ_COMMITTED|READ_UNCOMMITTED)</td>
+<td>READ_COMMITTED</td>
+<td>Isolation level</td>
+</tr>
+<tr class="b"><td><code>lockAcquisitionTimeout</code></td>
+<td><code>long</code></td>
+<td>10000</td>
+<td>Maximum time to attempt particular lock acquisition</td>
+</tr>
+<tr class="b"><td><code>writeSkewCheck</code></td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>If true, write skews are tested and exceptions 
+ are thrown if detected (only for IsolationLevel#REPEATABLE_READ)</td>
+</tr>
+</table></div>
+<a name="ce_default_expiration"></a><div class="section"><h3><a name="expiration"></a>expiration</h3>
+<p>Enables or disables expiration, and configures characteristics accordingly. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>lifespan</code></td>
+<td><code>long</code></td>
+<td>-1</td>
+<td>Maximum lifespan of a cache entry</td>
+</tr>
+<tr class="b"><td><code>maxIdle</code></td>
+<td><code>long</code></td>
+<td>-1</td>
+<td>Maximum time between two subsequent accesses to a particular cache entry</td>
+</tr>
+</table></div>
+<a name="ce_default_eviction"></a><div class="section"><h3><a name="eviction"></a>eviction</h3>
+<p>Enables or disables eviction, and configures characteristics accordingly. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>.</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>strategy</code></td>
+<td><code>evictionStrategy</code>* (NONE|FIFO|LRU)</td>
+<td>NONE</td>
+<td>Eviction strategy</td>
+</tr>
+<tr class="b"><td><code>wakeUpInterval</code></td>
+<td><code>long</code></td>
+<td>5000</td>
+<td>Interval between subsequent eviction runs</td>
+</tr>
+<tr class="b"><td><code>maxEntries</code></td>
+<td><code>int</code></td>
+<td>-1</td>
+<td>Maximum number of entries in a cache instance</td>
+</tr>
+</table></div>
+<a name="ce_default_customInterceptors"></a><div class="section"><h3><a name="customInterceptors"></a>customInterceptors</h3>
+<p>Configures custom interceptors to be added to the cache. Parent element is <a href="#ce_infinispan_default">&lt;default&gt;</a>. Child elements are <a href="#ce_customInterceptors_interceptor">&lt;interceptor&gt;</a>.
+</p>
+<a name="ce_customInterceptors_interceptor"></a><div class="section"><h3><a name="interceptor"></a>interceptor</h3>
+<p>Holds information about the custom interceptors defined in the configuration file. Parent element is <a href="#ce_default_customInterceptors">&lt;customInterceptors&gt;</a>. Child elements are <a href="#ce_interceptor_properties">&lt;properties&gt;</a>.
+</p><table class="bodyTable"> <tr class="a"><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+<tr class="b"><td><code>after</code></td>
+<td><code>string</code></td>
+<td>null</td>
+<td>Position this interceptor after the inteceptor specified by intereceptor's fully qualified class name</td>
+</tr>
+<tr class="b"><td><code>class</code></td>
+<td><code>string</code></td>
+<td>N/A</td>
+<td>Fully qualified intereceptor class name</td>
+</tr>
+<tr class="b"><td><code>position</code></td>
+<td><code>position</code>* (FIRST|LAST)</td>
+<td>null</td>
+<td>Position this interceptor as either FIRST or LAST intereceptor</td>
+</tr>
+<tr class="b"><td><code>before</code></td>
+<td><code>string</code></td>
+<td>null</td>
+<td>Position this interceptor before the inteceptor specified by intereceptor's fully qualified class name</td>
+</tr>
+<tr class="b"><td><code>index</code></td>
+<td><code>int</code></td>
+<td>-1</td>
+<td>Position this interceptor at the specified valid index of the interceptor chain</td>
+</tr>
+</table></div>
+<HR />
+Copyright &#169; 2009 <a href="http://www.jboss.org">JBoss, a division of Red Hat</a>. All Rights Reserved.
+<!-- Google Analytics --> <script type='text/javascript'> var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E")); </script> <script type='text/javascript'> try { var pageTracker = _gat._getTracker("UA-8601422-4"); pageTracker._trackPageview(); } catch(err) {}</script>
+</BODY>
+</HTML>

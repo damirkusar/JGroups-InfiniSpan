@@ -1,0 +1,74 @@
+
+
+Lab #2: ReplicatedStockServerInfinispan
+=======================================
+
+In this lab, we'll start with the basic StockServer program again. But this time, instead of using JGroups, we'll
+use Infinispan which already provides functionality for replicating stock information and state transfer.
+
+To get started, copy StockServer into ReplicatedStockServerInfinispan, and change the class name and instantiation in
+main().
+
+With Infinispan, we have a choice of making the StockServer replicated or distributed.
+
+A replicated server copies all changes to all other servers in the cluster.
+
+A distributed server has only N copies of the data, and picks the servers on which to store the data based on the
+consistent hash of the key.
+
+The server should be started with a command line option which makes it replicated or distributed (default=replicated).
+
+Other options could be added later, e.g. if replicated, how many copies etc.
+
+Stock quote reads would always be returned from the local cache, updates and removes would trigger replication or
+distribution traffic.
+
+
+
+Steps to implement replication in ReplicatedStockServerInfinispan
+-----------------------------------------------------------------
+
+0. The javadocs for Infinispan are in ./docs/javadocs/Infinispan
+
+1. Define a CacheManager and a Cache<String,Double>
+
+2. Create a global clustered configuration and instantiate the cache manager with it:
+
+   GlobalConfiguration cfg=GlobalConfiguration.getClusteredDefault();
+   manager=new DefaultCacheManager(cfg);
+
+3. Create a new Configuration (which overrides the values of the GlobalConfiguration), and configure it for
+   replication or distribution:
+
+   // REPL_ASYNC with state transfer:
+   config.setCacheMode(Configuration.CacheMode.REPL_ASYNC);  // asynchronous replication
+   config.setFetchInMemoryState(true);    // state is transferred to a new cluster node
+   config.setStateRetrievalTimeout(10000); // the new cluster node waits for 10 seconds max for the state
+
+   // DIST mode
+   config.setCacheMode(Configuration.CacheMode.DIST_ASYNC);  // DIST mode with asynchronous communication
+   config.setNumOwners(1); // only 1 copy of the data is present in the cluster (no redundancy)
+   config.setL1CacheEnabled(false);  // No L1 cache, data is always fetched from where it is stored
+
+4. Define a new configuration based on the global config and the local override and create a cache:
+   manager.defineConfiguration("mycluster", config);
+   cache=manager.getCache("mycluster");
+
+5. (optional) Add a listener to the cache manager for view changes, and to the cache for notifications of
+   creations, updates, deletes and visits. To do this, a class has to be annotated with @Listener and each
+   individual method has to be annotated correspondingly. See @Listener annotation for details. Example:
+
+    @Listener
+    public static final class MyListener {
+
+        @CacheEntryModified
+        public static void nodeModified(CacheEntryModifiedEvent evt) {
+            if(!evt.isOriginLocal() && !evt.isPre())
+                System.out.println("-- modified " + evt.getKey() + " to " + evt.getValue());
+        }
+    }
+
+6. To implement the loop, use the put(), get() and remove() methods of Cache. To iterate through the cache, use
+   Cache.entrySet() (inherited from ConcurrentMap).
+
+N. When stopping the cache, call stop() on the Cache and the CacheManager

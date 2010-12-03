@@ -1,0 +1,17 @@
+org.jgroups
+org.jgroups.annotations
+org.jgroups.auth
+org.jgroups.blocks
+org.jgroups.conf
+org.jgroups.debug
+org.jgroups.demos
+org.jgroups.demos.applets
+org.jgroups.demos.wb
+org.jgroups.jmx
+org.jgroups.logging
+org.jgroups.mux
+org.jgroups.persistence
+org.jgroups.protocols
+org.jgroups.protocols.pbcast
+org.jgroups.stack
+org.jgroups.util

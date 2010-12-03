@@ -1,0 +1,120 @@
+
+
+Lab #1: ReplicatedStockServer
+=============================
+
+In this lab, we'll build a stock server which replicates all of it stocks across a cluster. There is already
+a non-replicated version, StockServer. The replicated version will be called ReplicatedStockServer.
+
+Copy and rename the StockServer to ReplicatedStockServer. Implement the code to make it replicated (see below). Use
+ANT to compile and runReplicatedStockServer.sh to run it.
+
+The client is actually running inside of the 'server' here, we have an event loop which allows us to (1) print
+the contents of the quotes hashmap, (2) get a quote for a stock, (3) set a new value for a stock and (4)
+remove a stock from the listing.
+
+Stocks are maintained in a simple hashmap, keys are strings (quote names) and values integers (stock values).
+
+In the replicated version, we can start multiple instances and they should cluster using JGroups. This can be done on
+a single host, or on multiple hosts across the network.
+
+A new instance needs to initialize itself with state of an existing instance. All reads (printing all stocks and
+getting a quote are local), whereas all writes (settting a new quote and removing a stock) are replicated across
+the cluster, so all the instances always have the same contents.
+
+
+Steps to implement replication in ReplicatedStockServer
+-------------------------------------------------------
+
+0. The javadocs for JGroups are in ./docs/javadocs/JGroups (there's also a PDF version of the manual, JGroupsManual.pdf)
+
+1. Create a new instance variable channel of type JChannel, instantiate it with the udp.xml or tcp.xml config:
+
+   JChannel ch=new JChannel("/home/bela/lab/conf/udp.xml"); // adjust the path to the config file
+
+   The config file can also be defined by the "-props" command line option, change the program to make use of this, so
+   different configurations can be tried out.
+
+   The channel should be created and connected to (Channel.connect("cluster_name") in start(), and it should also be
+   closed (Channel.close()) in start (when exiting).
+
+2. When a stock quote is removed or updated, we need to create an instance of UpdateRequest and multicast it to the
+   cluster via the channel. To do this, we need to change setQuote() and removeQuote() to
+   - create an UpdateRequest with the stock name and value and the right type (SET, REMOVE)
+   - create a Message with the UpdateRequest as payload (new Message(null, null, update_request)) and
+   - call Channel.send(msg) with the message
+   Note that the internal quotes hashmap is *not* updated when the setQuote() or removeQuote() method is called, but
+   only when the generated message is received. To receive a message, see the next point.
+
+3. To receive messages, we register as a Receiver with the channel:
+   channel.setReceiver(this). This needs to be done before the channel is connected.
+
+   To do this, we (this) have to implement Receiver or extend ReceiverAdapter and implement receive(Message). The
+   second alternative is probably better as we don't need to provide implementations of all methods, but simply
+   override the ones we need.
+
+   The receive(Message msg) method is then called whenever a message has been received. We can get
+   - the sender by calling msg.getSrc()
+   - the payload by calling msg.getObject()
+
+   For debugging purposes, we could also print the payload to stdout, to see whether UpdateRequests are received
+   correctly, e.g.:
+   System.out.println("update request from " + msg.getSrc() + ": " + msg.getObject());
+
+   The payload then has to be cast to an UpdateRequest and - depending on the type of request (SET, REMOVE), the
+   internal quotes hashmap has to be updated.
+
+   To see whether the ReplicatedStockServer instances cluster correctly, we can override viewAccepted(View) of
+   ReceiverAdapter and print the new view to stdout.
+   If the cluster does not form, we can try using the loopback interface (127.0.0.1): modify the run script and
+   add -Djgroups.bind_addr=127.0.0.1, or add bind_addr="127.0.0.1" to the config XML file, under UDP or TCP.
+   Replication traffic will then use that interface.
+
+4. Now we can start a few instances and update them. All instances should have the same stocks and values, and when
+   we kill an instance ('x' or ctrl-c), then the view should be shown correctly.
+   However, note that new instances will not initialize them with the existing state. So, for example, if we have
+   nodes A and B in the cluster, with stocks RHT, GOOG and IBM. When a new node C is started, C's contents will
+   be empty.
+   So, to complete our example, we need to transfer A or B's contents to C. This is called state transfer and involves
+   adding 3 things to our program:
+   - Implementation of the byte[] getState() callback (from ReceiverAdapter)
+   - Implementation of the void setState(byte[]) callback (from ReceiverAdapter) and
+   - Calling of Channel.getState() (directly after Channel.connect())
+
+   The Channel.getState(Address stateProvider, long timeout) method (called on C) takes the address of the node
+   which will provide the state. If we leave it null, then the current coordinator (A) will be chosen. The 2nd
+   parameter is the number of milliseconds to wait for the state transfer, let's use 5000 for our example.
+
+   Once C calls Channel.getState(), A's byte[] getState() callback will get invoked (and C blocks until it has received
+   the full state). It needs to synchronize access to the internal quotes hashmap, so no updates can be applied while
+   we serialize the map into a byte[] buffer, and then the byte buffer needs to be returned from the callback, e.g.
+
+   public byte[] getState() {
+       synchronized(quotes) {
+           byte[] state=...
+           // serialize hashmap into byte[] buffer
+           return state;
+       }
+   }
+
+   Note that we now also need to synchronize methods that access the quotes hashmap, e.g. showStocks() and removeQuote().
+   To serialize and unserialize objects, JGroups provides the Util.objectToByteBuffer() and objectFromByteBuffer() methods.
+
+
+   The setState(byte[] new_state) method needs to create a temporary hashmap from the byte[] buffer, then  synchronize
+   on the quotes hashmap, clear its contents and the add all values of the temporary hashmap to the quotes hashmap, e.g.
+
+   public void setState(byte[] new_state) {
+       Map new_map=(Map)Util.objectFromByteBuffer(new_state);
+       synchronized(quotes) {
+           quotes.clear();
+           quotes.addAll(new_map);
+       }
+
+
+   Now try starting a new member B after A has some contents and make sure B now has the same contents. 
+
+   
+
+   
+

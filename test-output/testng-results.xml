@@ -1,0 +1,14 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Custom suite">
+    <groups>
+    </groups>
+    <test name="lab">
+      <class name="org.demo.ReplicatedStockServerInfinispan2">
+        <test-method status="PASS" signature="testExpiration()" name="testExpiration" duration-ms="9547" started-at="2009-11-11T15:17:51Z" finished-at="2009-11-11T15:18:01Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

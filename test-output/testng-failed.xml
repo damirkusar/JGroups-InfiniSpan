@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="5" skipfailedinvocationCounts="false" verbose="1" name="Failed suite [Custom suite]" junit="false" parallel="none" annotations="JDK">
+  <test name="lab(failed)" junit="false" parallel="none" annotations="JDK">
+    <classes>
+      <class name="org.demo.ReplicatedStockServerInfinispan2">
+        <methods>
+          <include name="testExpiration"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

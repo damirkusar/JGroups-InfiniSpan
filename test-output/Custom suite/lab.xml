@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lab" failures="0" tests="1" time="9.567" errors="0">
+  <properties/>
+  <testcase name="testExpiration" time="9.547" classname="org.demo.ReplicatedStockServerInfinispan2"/>
+</testsuite>
